@@ -19,15 +19,15 @@
 </head>
 
 <body>
-    <form>
+    <form id="form">
         <div class="form-group">
             <label>Логин</label>
-            <input type="text" name="login">
+            <input type="text" name="login" id="login">
             <span class="hint" id="loginHint">Ваш логин должен состоять не менее чем из 4 символов</span>
         </div>
         <div class="form-group">
             <label>Пароль</label>
-            <input type="password" name="password">
+            <input type="password" name="password" id="password">
             <span class="hint" id="passwordHint">Пароль должен содержать буквы, цифры и специальный символ</span>
         </div>
 
@@ -43,7 +43,26 @@
         2. В момент, когда поле ввода login получает фокус, покажите подсказку, которая находится в span#loginHint
            В момент, когда фокус получает поле ввода password - подсказку span#passwordHint
         */
-       
+        //1
+        let form = document.getElementById('form')
+        form.addEventListener("submit", function () {
+            const login = document.getElementById('login')
+            const password = document.getElementById('password')
+            alert(`Login: ${login.value}\n Password: ${password.value}`)
+        })
+        //2
+        document.getElementById("password").onfocus = function () {
+            document.getElementById("passwordHint").style.display = 'inline'
+        }
+        document.getElementById("password").onblur = function () {
+            document.getElementById("passwordHint").style.display = 'none'
+        }
+        document.getElementById("login").onfocus = function () {
+            document.getElementById("loginHint").style.display = 'inline'
+        }
+        document.getElementById("login").onblur = function () {
+            document.getElementById("loginHint").style.display = 'none'
+        }
     </script>
 </body>
 
