@@ -65,6 +65,12 @@
 
     <script>
         const form = document.forms[0];
+        const forbiddenEmails = [
+            "admin@example.com",
+            "superuser@example.com",
+            "user@example.com"
+        ];
+        const emailInput = form.emailInput;
 
         form.addEventListener("submit", function (e) {
             alert("Форма отправлена");
@@ -76,10 +82,22 @@
                 form.passwordInput.setCustomValidity("Пароль и подтверждение пароля не совпадают.");
             }
             else {
-                form.passwordConfirmInput.setCustomValidity(""); 
+                form.passwordConfirmInput.setCustomValidity("");
                 form.passwordInput.setCustomValidity("");
             }
         });
+        const emailError = document.createElement("span")
+        emailError.style.color = "red"
+        emailError.style.fontSize = "14px"
+        emailInput.addEventListener("input", function () {
+            if (forbiddenEmails.includes(emailInput.value)) {
+                emailError.textContent = "Этот email запрещён для регистрации"
+                emailInput.setCustomValidity("Запрещённый email")
+            } else {
+                emailError.textContent = "";
+                emailInput.setCustomValidity("");
+            }
+        })
 
         /*
         Задание:
